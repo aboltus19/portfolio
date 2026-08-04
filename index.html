@@ -1,0 +1,374 @@
+<!-- Олег Абрамов — портфолио-лендинг. Картинки/QR вшиваются build_portfolio.py -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Олег Абрамов — Product Manager</title>
+
+<style>
+  :root{
+    --ground:#F1F3F5; --surface:#FFFFFF; --surface-2:#F7F8FA; --ink:#14171C; --muted:#586070;
+    --faint:#8A93A1; --accent:#A85A10; --accent-soft:#F3E7D6; --line:#E1E5EA;
+    --good:#2E9A63;
+    --shadow:0 1px 2px rgba(20,23,28,.05), 0 8px 24px rgba(20,23,28,.06);
+    --sans:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    --mono:ui-monospace,"Cascadia Code","SF Mono",Menlo,Consolas,"Liberation Mono",monospace;
+  }
+
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  body{margin:0; background:var(--ground); color:var(--ink);
+    font-family:var(--sans); font-size:17px; line-height:1.6;
+    -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;}
+  .wrap{max-width:980px; margin:0 auto; padding:0 24px}
+  section{padding:60px 0; border-top:1px solid var(--line)}
+  section:first-of-type{border-top:none}
+
+  .eyebrow{font-family:var(--mono); font-size:12px; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--accent); margin:0 0 14px; display:flex; align-items:center; gap:10px}
+  .eyebrow::before{content:""; width:22px; height:1px; background:var(--accent); opacity:.6}
+  h2{font-size:clamp(24px,4vw,32px); line-height:1.15; margin:0 0 10px; letter-spacing:-.02em; text-wrap:balance}
+  .sub{color:var(--muted); margin:0 0 28px; max-width:60ch}
+  h3{font-size:19px; margin:0 0 8px; letter-spacing:-.01em}
+  p{margin:0 0 16px; max-width:64ch}
+  a{color:var(--accent); text-decoration:none}
+  a:hover{text-decoration:underline}
+  a:focus-visible, button:focus-visible{outline:2px solid var(--accent); outline-offset:3px; border-radius:3px}
+
+  /* HERO */
+  .hero{padding-top:70px; padding-bottom:52px}
+  .hero-grid{display:grid; grid-template-columns:1.35fr .9fr; gap:44px; align-items:center}
+  .hero h1{font-size:clamp(38px,7vw,62px); line-height:1.02; letter-spacing:-.03em; margin:0 0 14px; text-wrap:balance}
+  .role{font-family:var(--mono); font-size:15px; color:var(--accent); margin:0 0 6px}
+  .grade{font-family:var(--mono); font-size:12.5px; color:var(--faint); letter-spacing:.03em; margin:0 0 20px}
+  .lede{font-size:19px; color:var(--muted); max-width:52ch; margin:0}
+  .tagline{font-size:16px; color:var(--ink); max-width:52ch; margin-top:18px; padding-left:16px;
+    border-left:2px solid var(--accent); line-height:1.55}
+  .cta{display:flex; flex-wrap:wrap; gap:12px; margin-top:26px}
+  .btn{font-family:var(--sans); font-size:15px; font-weight:600; padding:11px 18px; border-radius:8px;
+    border:1px solid var(--line); background:var(--surface); color:var(--ink); cursor:pointer;
+    transition:transform .12s ease, border-color .12s ease; display:inline-flex; align-items:center; gap:8px}
+  .btn:hover{transform:translateY(-1px); border-color:var(--accent); text-decoration:none}
+  .btn.primary{background:var(--accent); border-color:var(--accent); color:#fff}
+  .portrait{position:relative; aspect-ratio:5/4; border-radius:14px; overflow:hidden;
+    background:var(--surface); border:1px solid var(--line); box-shadow:var(--shadow)}
+  .portrait img{width:100%; height:100%; object-fit:cover; display:block; position:relative; z-index:1}
+  .portrait .ph{position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+    flex-direction:column; gap:6px; font-family:var(--mono); font-size:12px; color:var(--faint); text-align:center; padding:16px}
+
+  .metrics{display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--line);
+    border:1px solid var(--line); border-radius:12px; overflow:hidden; margin-top:40px}
+  .metric{background:var(--surface); padding:22px 20px; position:relative}
+  .metric .seg{display:block; font-family:var(--mono); font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--faint); margin-bottom:10px}
+  .metric .n{font-family:var(--mono); font-size:clamp(21px,3vw,28px); font-weight:600;
+    letter-spacing:-.02em; font-variant-numeric:tabular-nums; line-height:1.12}
+  .metric .n .u{white-space:nowrap}
+  .metric .n b{color:var(--good); font-weight:600}
+  .metric .l{font-size:13px; color:var(--muted); margin-top:6px; line-height:1.4}
+
+  /* VALUE CARDS */
+  .value{display:grid; grid-template-columns:repeat(2,1fr); gap:16px}
+  .vcard{background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:22px 22px 20px;
+    transition:transform .12s ease, box-shadow .12s ease}
+  .vcard:hover{transform:translateY(-2px); box-shadow:var(--shadow)}
+  .vcard .k{font-family:var(--mono); font-size:12px; color:var(--accent); letter-spacing:.06em; text-transform:uppercase; margin-bottom:10px}
+  .vcard h3{margin:0 0 6px; font-size:17px}
+  .vcard p{margin:0; color:var(--muted); font-size:15px; max-width:none}
+
+  /* EXHIBITS */
+  .exhibit{background:var(--surface); border:1px solid var(--line); border-radius:14px;
+    padding:26px 26px 24px; margin-bottom:20px; box-shadow:var(--shadow);
+    transition:transform .12s ease, box-shadow .12s ease}
+  .exhibit:hover{transform:translateY(-2px)}
+  .exhibit:last-child{margin-bottom:0}
+  .exhibit .tag{font-family:var(--mono); font-size:12px; color:var(--accent); letter-spacing:.05em; margin-bottom:10px}
+  .exhibit h3{font-size:20px; margin:0 0 12px}
+  .exhibit p{color:var(--muted); font-size:16px}
+  .exhibit .role{font-family:inherit; color:var(--ink); font-size:15px; margin:0 0 14px}
+  .exhibit .role b{color:var(--ink)}
+  .res{display:flex; flex-wrap:wrap; gap:8px; margin:14px 0}
+  .res .pill{font-family:var(--mono); font-size:13px; padding:6px 11px; border-radius:7px;
+    background:var(--surface-2); border:1px solid var(--line); color:var(--ink); font-variant-numeric:tabular-nums}
+  .res .pill b{color:var(--good)}
+  .quote{margin:16px 0; padding:16px 18px; border-left:3px solid var(--accent); background:var(--accent-soft); border-radius:0 10px 10px 0}
+  .quote p{margin:0; color:var(--ink); font-size:15.5px; font-style:italic}
+  .quote .who{font-family:var(--mono); font-size:12px; color:var(--muted); font-style:normal; margin-top:8px; display:block}
+  .links{display:flex; flex-wrap:wrap; gap:8px 18px; margin-top:14px; font-family:var(--mono); font-size:13px}
+  .links a{white-space:nowrap}
+  @media (max-width:760px){.links a{white-space:normal}}
+  .note{font-size:13.5px; color:var(--faint); margin-top:12px}
+  .shots{display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin:18px 0 4px}
+  .shot{position:relative; aspect-ratio:9/19; border-radius:10px; overflow:hidden;
+    background:var(--surface-2); border:1px solid var(--line)}
+  .shot img{width:100%; height:100%; object-fit:cover; object-position:top; display:block; position:relative; z-index:1}
+  .shot .ph{position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+    font-family:var(--mono); font-size:11px; color:var(--faint)}
+
+  /* PEDIGREE */
+  .ped-intro{color:var(--muted); max-width:62ch}
+  .ped{display:grid; gap:14px}
+  .prow{display:grid; grid-template-columns:150px 1fr; gap:8px 20px; padding:16px 0; border-top:1px solid var(--line)}
+  .prow:first-child{border-top:none}
+  .prow .k{font-family:var(--mono); font-size:12px; color:var(--accent); letter-spacing:.06em; text-transform:uppercase; padding-top:2px}
+  .prow .v{color:var(--muted); font-size:15.5px}
+  .prow .v b{color:var(--ink)}
+  .pat-chips{display:flex; flex-wrap:wrap; gap:6px; margin-top:8px}
+  .pat-chips a{font-family:var(--mono); font-size:12px; padding:4px 9px; border:1px solid var(--line);
+    border-radius:6px; background:var(--surface); color:var(--muted); font-variant-numeric:tabular-nums;
+    text-decoration:none; transition:border-color .12s ease, color .12s ease}
+  .pat-chips a:hover{border-color:var(--accent); color:var(--accent); text-decoration:none}
+
+  /* STACK */
+  .stack-group{margin-bottom:20px}
+  .stack-group .k{font-family:var(--mono); font-size:12px; color:var(--faint); letter-spacing:.1em; text-transform:uppercase; margin-bottom:12px}
+  .chips{display:flex; flex-wrap:wrap; gap:8px}
+  .chip{font-family:var(--mono); font-size:13px; padding:6px 12px; border:1px solid var(--line);
+    border-radius:7px; background:var(--surface); color:var(--ink)}
+
+  /* CONTACT */
+  .contact-grid{display:grid; grid-template-columns:1.3fr .7fr; gap:40px; align-items:center}
+  .clinks{display:grid; gap:14px; margin-top:8px}
+  .clink{display:flex; align-items:baseline; gap:14px; font-size:17px}
+  .clink .k{font-family:var(--mono); font-size:12px; color:var(--faint); letter-spacing:.08em; text-transform:uppercase; min-width:88px}
+  .clink a, .clink span{color:var(--ink)}
+  .clink a:hover{color:var(--accent)}
+  .qr{display:flex; gap:14px; align-items:center; justify-content:flex-end}
+  .qr svg{width:104px; height:104px; color:var(--ink)}
+  .qr .cap{font-family:var(--mono); font-size:12px; color:var(--muted); line-height:1.5}
+
+  footer{border-top:1px solid var(--line); padding:26px 0 46px; color:var(--faint); font-size:13px; font-family:var(--mono)}
+
+  @media (max-width:760px){
+    body{font-size:16px}
+    section{padding:44px 0}
+    .hero-grid{grid-template-columns:1fr; gap:30px}
+    .portrait{max-width:360px}
+    .metrics{grid-template-columns:repeat(2,1fr)}
+    .value{grid-template-columns:1fr}
+    .shots{grid-template-columns:repeat(2,1fr)}
+    .prow{grid-template-columns:1fr; gap:4px}
+    .contact-grid{grid-template-columns:1fr; gap:26px}
+    .qr{justify-content:flex-start}
+  }
+</style>
+
+<div class="wrap">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-grid">
+      <div>
+        <p class="eyebrow">Product Manager · Санкт-Петербург</p>
+        <h1>Олег Абрамов</h1>
+        <p class="role">software + hardware · B2B / B2C / B2G · AI-native</p>
+        <p class="grade">10+ лет в цифровом инжиниринге · 4+ в продукт-менеджменте</p>
+        <p class="lede">Довожу цифровые продукты до результата — от discovery до релиза, в срок и без лишних затрат. И сам собираю рабочие MVP с помощью AI.</p>
+        <p class="tagline">Зрелый опыт со стартап-энергией: быстро учусь, легко схожусь с командой и первым тащу в работу новые инструменты.</p>
+        <div class="cta">
+          <a class="btn primary" href="https://t.me/olegline" target="_blank" rel="noopener">Написать в Telegram</a>
+          <a class="btn" href="https://spb.hh.ru/resume/b955ebc7ff101b0efc0039ed1f4353456e436e" target="_blank" rel="noopener">Резюме на hh.ru</a>
+          <a class="btn" href="mailto:olalink@mail.ru">olalink@mail.ru</a>
+        </div>
+      </div>
+      <div class="portrait">
+        <div class="ph">ФОТО<br>assets/photo.jpg</div>
+        <img src="assets/photo.jpg" alt="Олег Абрамов" onerror="this.style.display='none'">
+      </div>
+    </div>
+
+    <div class="metrics">
+      <div class="metric"><span class="seg">B2C</span><div class="n">30% <b>→</b> 14%</div><div class="l">снижение раннего оттока</div></div>
+      <div class="metric"><span class="seg">B2B</span><div class="n"><b>+</b>150 <span class="u">млн ₽/год</span></div><div class="l">рост выручки продукта</div></div>
+      <div class="metric"><span class="seg">B2C</span><div class="n">40 <b>→</b> 70</div><div class="l">рост CSAT (первый месяц)</div></div>
+      <div class="metric"><span class="seg">B2G</span><div class="n"><b>−</b>50 <span class="u">млн ₽/год</span></div><div class="l">снижение издержек заказчика</div></div>
+    </div>
+  </section>
+
+  <!-- VALUE -->
+  <section>
+    <p class="eyebrow">Что вы получаете</p>
+    <h2>Продакт, который снимает боль, а не добавляет её</h2>
+    <p class="sub">Веду продукт самостоятельно и говорю на языке результата — вот что это значит для команды.</p>
+    <div class="value">
+      <div class="vcard"><div class="k">Полный цикл</div><h3>Веду продукт от идеи до релиза</h3><p>Discovery → Delivery: исследования, требования, приоритизация, релиз, метрики. Работаю самостоятельно и довожу начатое до результата.</p></div>
+      <div class="vcard"><div class="k">Эффективность</div><h3>Больше за меньшие затраты</h3><p>AI-native: аналитика, гипотезы, прототипы и даже рабочие приложения — быстрее и дешевле с помощью AI.</p></div>
+      <div class="vcard"><div class="k">Широта</div><h3>Понимаю софт, железо и людей</h3><p>Редкая комбинация software + hardware + product. Говорю и с бизнесом, и с инженерами, и с R&D — меньше потерь на стыках.</p></div>
+      <div class="vcard"><div class="k">Данные</div><h3>Результат в цифрах</h3><p>Работаю метриками: churn, retention, CSAT, NPS, stickiness, unit-экономика. Решения — на данных, а не на ощущениях.</p></div>
+    </div>
+  </section>
+
+  <!-- EXHIBITS -->
+  <section>
+    <p class="eyebrow">Пруфы</p>
+    <h2>Что я уже сделал</h2>
+    <p class="sub">Не список обязанностей, а конкретные продукты — с ролью, результатом и, где можно, кликабельным доказательством.</p>
+
+    <!-- CREST -->
+    <div class="exhibit">
+      <div class="tag">MedTech · продукт с нуля</div>
+      <h3>Платформа для терапии детей с аутизмом (центр CREST, г. Гонконг)</h3>
+      <p>Клиника не имела инструмента объективно измерять уровень возбудимости ребёнка во время сеанса — терапевт полагался только на невербальные сигналы.</p>
+      <p class="role"><b>Что делал:</b> CustDev с клиникой → PRD → юнит-экономика → <b>вёл команду 6 человек</b> → выкатил MVP: мобильное приложение (видео + сигнал в реальном времени) + адаптированная прошивка браслета GoBe + веб-кабинет врача; подключил поддержку.</p>
+      <div class="quote">
+        <p>«Разница ошеломительная между тем, что я думаю о ребёнке, стоящем передо мной, оценивая невербальные сигналы, и тем, что вижу по цифрам.»</p>
+        <span class="who">Ким Бартел — международный эксперт по нейросенсорной терапии</span>
+      </div>
+      <p class="note">Реальное применение в клинике; заказчик представлял продукт на международных конференциях и начал продавать браслеты в другие клиники.</p>
+      <div class="links">
+        <a href="https://eda-plat.healbe.com/" target="_blank" rel="noopener">Лендинг платформы →</a>
+        <a href="https://www.youtube.com/watch?v=rVb2tsBOHG0" target="_blank" rel="noopener">Видео: применение →</a>
+        <a href="https://www.youtube.com/watch?v=SOsWvbu8QaU" target="_blank" rel="noopener">Интервью Ким Бартел →</a>
+        <a href="https://www.kimbarthel.ca/event-calendar/from-data-to-decisions-hong-kong" target="_blank" rel="noopener">Анонс конференции →</a>
+      </div>
+    </div>
+
+    <!-- SUP -->
+    <div class="exhibit">
+      <div class="tag">AI-native · продуктовый цикл соло · пилот</div>
+      <h3>Приложение для проката SUP: прошёл полный цикл соло</h3>
+      <p>От проблемных интервью с прокатами до работающего MVP — сейчас в пилоте у действующего проката: выдача и возврат, касса смены, парк досок, статус «на воде».</p>
+      <p class="role"><b>Что делал:</b> CustDev → продуктовые требования → юнит-экономика → приоритизация → релиз. AI использовал как ускоритель на каждом шаге, включая агентов для стресс-проверки гипотез и оценки рисков масштабирования.</p>
+      <div class="shots">
+        <div class="shot"><div class="ph">скрин 1</div><img src="assets/sup-1.jpg" alt="SUP — кабинет точки" onerror="this.style.display='none'"></div>
+        <div class="shot"><div class="ph">скрин 2</div><img src="assets/sup-2.jpg" alt="SUP — тарифы и правила" onerror="this.style.display='none'"></div>
+        <div class="shot"><div class="ph">скрин 3</div><img src="assets/sup-3.jpg" alt="SUP — касса смены" onerror="this.style.display='none'"></div>
+        <div class="shot"><div class="ph">скрин 4</div><img src="assets/sup-4.jpg" alt="SUP — аренды на воде" onerror="this.style.display='none'"></div>
+      </div>
+      <p class="note">Делал, чтобы соло пройти полный продуктовый цикл и освоить AI. Продуктовые решения и приоритизацию делаю сам; AI ускоряет, но не заменяет продакта. Стек: React Native + Supabase, платежи через ЮКасса.</p>
+      <div class="links">
+        <a href="https://expo.dev/artifacts/eas/CDIu2ZUtWayxwqNTyN1qgOiPVwv1CKJa2M6lXd0zH4s.apk" target="_blank" rel="noopener">Скачать APK (при установке «Не проверять») →</a>
+      </div>
+    </div>
+
+    <!-- HEALBE RESULTS -->
+    <div class="exhibit">
+      <div class="tag">B2C MedTech · носимая электроника · данные</div>
+      <h3>Умный браслет для здоровья — удержание и лояльность</h3>
+      <p>Развивал функционал мобильного приложения (сердечный мониторинг — ЭКГ, аритмия): PRD, проработка UI/UX с дизайнерами, релиз.</p>
+      <p class="role"><b>Что делал против оттока:</b> сам разработал CJM и систему триггерного онбординга — снизил ранний отток и поднял удовлетворённость в первый месяц:</p>
+      <div class="res">
+        <span class="pill">Ранний отток 30% <b>→</b> 14%</span>
+        <span class="pill">CSAT 40 <b>→</b> 70</span>
+      </div>
+      <p class="note">Работаю с реальной продуктовой аналитикой: NPS, retention/churn по когортам, lifetime/LTV.</p>
+    </div>
+
+    <!-- MED STRATEGY -->
+    <div class="exhibit">
+      <div class="tag">Продуктовая стратегия · B2B / B2G</div>
+      <h3>Стратегия выхода medtech-продукта в клиники</h3>
+      <p>В одиночку разработал стратегию приземления браслета в B2B/B2G: анализ стейкхолдеров, срез рынка (TAM/SAM/SOM), 6 продуктовых инициатив по единому канвасу, переход от разовой продажи устройства к подписке + комиссиям клиник (LTV).</p>
+    </div>
+
+    <!-- B2B PRODUCTS -->
+    <div class="exhibit">
+      <div class="tag">Цифровые B2B-продукты · промышленность · нефтегаз · ж/д</div>
+      <h3>Запускал продукты для крупных индустриальных заказчиков</h3>
+      <p>Вёл цифровые продукты в Газпромнефти и ГК «1520»: IoT-диагностика систем управления поездами, АРМ диспетчера, устройство ж/д-перехода (снизило смертность пешеходов в 10 раз), промышленный вендинг, облачная обработка данных аэрофотосъёмки. Продукты давали измеримый бизнес-эффект:</p>
+      <div class="res">
+        <span class="pill"><b>+150</b> млн ₽/год выручки</span>
+        <span class="pill">риск ущерба <b>×10 ↓</b></span>
+        <span class="pill"><b>−50</b> млн ₽/год издержек</span>
+        <span class="pill">отказы <b>23 → 3</b></span>
+      </div>
+      <p class="role"><b>Что делал:</b> Discovery, CustDev, юнит-экономика, приоритизация MVP, управление распределёнными командами и подрядчиками; защищал бюджеты на питчах.</p>
+      <p class="note">Часть продуктов — в критической транспортной инфраструктуре: цена отказа измеряется поездными составами и жизнями людей.</p>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section>
+    <p class="eyebrow">О себе</p>
+    <h2>Как я работаю</h2>
+    <p>Люблю находить решение там, где его не ищут: сам собрал приложение с AI, придумывал киллер-фичи, добивался результата малыми силами. Быстро учусь и первым тащу в команду новые инструменты.</p>
+    <p>С людьми — легко и по-человечески, даже в спорах: продукт двигают договорённости и цифры, а не давление. Знаю DISC и подстраиваю коммуникацию под тип собеседника. Вне работы — семья, серфинг и книги; это держит в балансе и в контакте с реальностью.</p>
+  </section>
+
+  <!-- PEDIGREE -->
+  <section>
+    <p class="eyebrow">Редкий фундамент</p>
+    <h2>Понимаю сложное там, где большинство видят только интерфейс</h2>
+    <p class="ped-intro sub">За продуктом — инженерный фундамент: умею разбираться в технически сложных системах, а не только в интерфейсе.</p>
+    <div class="ped">
+      <div class="prow">
+        <div class="k">Патенты РФ</div>
+        <div class="v"><b>Соавтор 9 патентов</b> в области цифровизации ж.д. транспорта.
+          <div class="pat-chips">
+            <a href="https://patents.google.com/patent/RU2749159C1" target="_blank" rel="noopener">№2749159</a>
+            <a href="https://patents.google.com/patent/RU2694709C1" target="_blank" rel="noopener">№2694709</a>
+            <a href="https://patents.google.com/patent/RU2748818C1" target="_blank" rel="noopener">№2748818</a>
+            <a href="https://patents.google.com/patent/RU2762973C1" target="_blank" rel="noopener">№2762973</a>
+            <a href="https://patents.google.com/patent/RU2602154C1" target="_blank" rel="noopener">№2602154</a>
+            <a href="https://patents.google.com/patent/RU2578837C1" target="_blank" rel="noopener">№2578837</a>
+            <a href="https://patents.google.com/patent/RU183214U1" target="_blank" rel="noopener">№183214</a>
+            <a href="https://patents.google.com/patent/RU139451U1" target="_blank" rel="noopener">№139451</a>
+            <a href="https://patents.google.com/patent/RU113093U1" target="_blank" rel="noopener">№113093</a>
+          </div>
+        </div>
+      </div>
+      <div class="prow">
+        <div class="k">Публикация</div>
+        <div class="v"><b>Соавтор статьи</b> «Кибербезопасность микропроцессорных систем железнодорожной автоматики» — журнал «Автоматика, связь, информатика» (ОАО «РЖД»), 2020. <a href="https://doi.org/10.34649/AT.2020.12.12.002" target="_blank" rel="noopener">DOI →</a></div>
+      </div>
+      <div class="prow">
+        <div class="k">Признание</div>
+        <div class="v">Благодарность Комитета по развитию транспортной инфраструктуры Санкт-Петербурга.</div>
+      </div>
+      <div class="prow">
+        <div class="k">Обучение</div>
+        <div class="v">«Школа менеджеров продукта» и «Agile и Scrum в проектах и продуктах» — Корпоративный университет «Газпром нефти».</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STACK -->
+  <section>
+    <p class="eyebrow">Инструменты</p>
+    <h2>Стек и методологии</h2>
+    <div class="stack-group">
+      <div class="k">Продукт</div>
+      <div class="chips">
+        <span class="chip">Discovery</span><span class="chip">CustDev</span><span class="chip">JTBD</span>
+        <span class="chip">CJM</span><span class="chip">PRD</span><span class="chip">Unit-экономика</span>
+        <span class="chip">TAM / SAM / SOM</span><span class="chip">Retention / Churn</span><span class="chip">NPS / CSAT</span>
+      </div>
+    </div>
+    <div class="stack-group">
+      <div class="k">Методологии</div>
+      <div class="chips">
+        <span class="chip">Agile / Scrum</span><span class="chip">Kanban</span><span class="chip">Waterfall</span><span class="chip">Stakeholder mgmt</span>
+      </div>
+    </div>
+    <div class="stack-group">
+      <div class="k">Инструменты и AI</div>
+      <div class="chips">
+        <span class="chip">Jira / Confluence</span><span class="chip">Miro</span><span class="chip">Figma</span>
+        <span class="chip">Notion</span><span class="chip">NotebookLM</span><span class="chip">Claude Code</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section>
+    <p class="eyebrow">Контакты</p>
+    <div class="contact-grid">
+      <div>
+        <h2>Расскажите про вашу задачу — покажу, как решу</h2>
+        <div class="clinks">
+          <div class="clink"><span class="k">Telegram</span><a href="https://t.me/olegline" target="_blank" rel="noopener">@olegline</a></div>
+          <div class="clink"><span class="k">Email</span><a href="mailto:olalink@mail.ru">olalink@mail.ru</a></div>
+          <div class="clink"><span class="k">Резюме</span><a href="https://spb.hh.ru/resume/b955ebc7ff101b0efc0039ed1f4353456e436e" target="_blank" rel="noopener">hh.ru →</a></div>
+          <div class="clink"><span class="k">Город</span><span>Санкт-Петербург</span></div>
+        </div>
+      </div>
+      <div class="qr">
+        <!--QR_RESUME-->
+        <span class="cap">Резюме<br>на hh.ru</span>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    Эта страница собрана с помощью AI (Claude) — как и приложение SUP выше. · © 2026 Олег Абрамов
+  </footer>
+
+</div>
